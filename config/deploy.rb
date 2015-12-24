@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'demo_user'
+set :repo_url, 'git@github.com:mmgrep/demo_user.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -11,16 +11,18 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # set :deploy_to, '/var/www/my_app_name'
 
 # Default value for :scm is :git
-# set :scm, :git
+set :scm, :git
 
 # Default value for :format is :pretty
-# set :format, :pretty
+set :format, :pretty
 
 # Default value for :log_level is :debug
 # set :log_level, :debug
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
+
+set :deploy_to, '/home/rails'
 
 # Default value for :linked_files is []
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
@@ -34,40 +36,16 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-# If the environment differs from the stage name
-set :rails_env, 'staging'
-
-# Defaults to 'db'
-set :migration_role, 'migrator'
-
-# Defaults to false
-# Skip migration if files in db/migrate were not modified
-set :conditionally_migrate, true
-
-# Defaults to [:web]
-set :assets_roles, [:web, :app]
-
-# Defaults to 'assets'
-# This should match config.assets.prefix in your rails config/application.rb
-set :assets_prefix, 'prepackaged-assets'
-
-# If you need to touch public/images, public/javascripts, and public/stylesheets on each deploy
-set :normalize_asset_timestamps, %{public/images public/javascripts public/stylesheets}
-
-# Defaults to nil (no asset cleanup is performed)
-# If you use Rails 4+ and you'd like to clean up old assets after each deploy,
-# set this to the number of versions to keep
-set :keep_assets, 2
-
 namespace :deploy do
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
+ after :restart, :clear_cache do
+   on roles(:web), in: :groups, limit: 3, wait: 10 do
+     # Here we can do anything such as:
+     # within release_path do
+     #   execute :rake, 'cache:clear'
+     # end
+   end
+ end
 
 end
+

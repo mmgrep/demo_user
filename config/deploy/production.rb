@@ -1,3 +1,5 @@
+server '192.168.10.13', user: 'deploy', roles: %w{web app}, my_property: :my_value,  port: 3000
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
